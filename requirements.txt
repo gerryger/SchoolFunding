@@ -3,10 +3,10 @@
 python-dotenv
 
 # web application:
-Flask==2.1.1
+Flask==3.0.0
 
 # auth (login with google via oauth):
-Authlib==1.0.0
+Authlib==1.2.0
 
 # database (cloud firestore):
 firebase-admin==5.0.0
