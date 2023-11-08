@@ -1,0 +1,62 @@
+{% extends "bootstrap_5_layout.html" %}
+{% set active_page = "create_funding" %}
+{% set bg_image_active = false %}
+
+{% block content %}
+    <div class="container">
+        <div class="container">
+            <h1 class="sf-page-title text-center">Create your funding</h1>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6" style="border-width: thin;">
+                    <div class="container">
+                        <div class="sidebar-steps">
+                            <div class="row sf-step">
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-dark btn-circle btn-md">1</button>
+                                </div>
+                                <div class="step-title col-10">
+                                    <p>Get Started</p>
+                                </div>
+                            </div>
+                            <div class="row sf-step">
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-dark btn-circle btn-md">2</button>
+                                </div>
+                                <div class="step-title col-10">
+                                    <p>Background</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 align-items-start">
+                    <h1>Fundraiser Information</h1>
+                    <form>
+                        <div class="mb-3">
+                            <label for="fundraiserTitleTxt" class="form-label">Fundraiser title</label>
+                            <input type="text" class="form-control" id="fundraiserTitleTxt" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">Add the title of your page.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fundTypeSelect" class="form-label">Fund type</label>
+                            <select class="form-select" id="fundTypeSelect" aria-label="Default select example" aria-describedby="fundTypeSelectHelp">
+                                <option value="{{fund_types[0]['type']}}" selected>{{fund_types[0]['type']|lower|replace("_"," ")}}</option>
+                                {% for fund_type in fund_types[1:] %}
+                                    <option value="{{fund_type['type']}}">{{fund_type['type']|lower|replace("_"," ")}}</option>
+                                {% endfor %}
+                            </select>
+                            <div id="fundTypeSelectHelp" class="form-text">Select the funding type.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fundraiserLocationSelect" class="form-label">Fundraiser location</label>
+                            <select class="selectpicker countrypicker form-select" id="fundraiserLocationSelect"></select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

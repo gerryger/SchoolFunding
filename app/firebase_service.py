@@ -38,6 +38,24 @@ class FirebaseService:
         products_ref = self.db.collection("products")
         products = [doc.to_dict() for doc in products_ref.stream()]
         return products
+    
+    #
+    # FUNDINGS
+    #
+
+    def fetch_fundings(self):
+        fundings_ref = self.db.collection("fundings")
+        fundings = [doc.to_dict() for doc in fundings_ref.stream()]
+        return fundings
+
+    #
+    # FUND TYPE
+    #
+
+    def fetch_fund_types(self):
+        fund_types_ref = self.db.collection("fund_type")
+        fund_types = [type.to_dict() for type in fund_types_ref.stream()]
+        return fund_types
 
     #
     # ORDERS

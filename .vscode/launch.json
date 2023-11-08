@@ -1,0 +1,21 @@
+{
+    "version": "0.2",
+    "configurations": [
+        {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/web_app/__init__.py",  // Update this with your app entry point",
+            "args": [],
+            "env": {
+                "FLASK_APP": "web_app",  // Update this with your app entry point
+                "FLASK_ENV": "development",
+                "PYTHONPATH": "${workspaceRoot}"
+            },
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "stopOnEntry": false,
+            "jinja": true
+        }
+    ]
+}

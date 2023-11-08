@@ -1,5 +1,4 @@
-
-
+import sys
 import os
 from dotenv import load_dotenv
 
@@ -12,6 +11,7 @@ from app.firebase_service import FirebaseService
 from web_app.routes.home_routes import home_routes
 from web_app.routes.auth_routes import auth_routes
 from web_app.routes.user_routes import user_routes
+from web_app.routes.funding_routes import funding_routes
 
 load_dotenv()
 
@@ -24,7 +24,7 @@ NAV_ICON_CLASS = "bi-globe"
 
 # https://getbootstrap.com/docs/5.1/components/navbar/#color-schemes
 # https://getbootstrap.com/docs/5.1/customize/color/#theme-colors
-NAV_COLOR_CLASS = "navbar-dark bg-primary"
+NAV_COLOR_CLASS = "navbar-dark bg-dark"
 
 # for google oauth login:
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
@@ -95,6 +95,7 @@ def create_app(firebase_service=None):
     app.register_blueprint(home_routes)
     app.register_blueprint(auth_routes)
     app.register_blueprint(user_routes)
+    app.register_blueprint(funding_routes)
 
     return app
 

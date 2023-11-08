@@ -69,7 +69,7 @@ def google_oauth_callback():
 
     else:
         print("NO USER INFO")
-    return redirect("/")
+    return redirect("/home")
 
 @auth_routes.route("/logout")
 def logout():
