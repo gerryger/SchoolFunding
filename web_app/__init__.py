@@ -13,6 +13,11 @@ from web_app.routes.auth_routes import auth_routes
 from web_app.routes.user_routes import user_routes
 from web_app.routes.funding_routes import funding_routes
 
+from flask_bootstrap import Bootstrap5
+from flask_wtf import FlaskForm, CSRFProtect
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired, Length
+
 load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY", default="super secret") # IMPORTANT: override in production
@@ -45,6 +50,11 @@ def create_app(firebase_service=None):
     #
 
     app = Flask(__name__)
+
+    # Bootstrap-Flask requires this line
+    bootstrap = Bootstrap5(app)
+    # Flask-WTF requires this line
+    csrf = CSRFProtect(app)
 
     #
     # CONFIG

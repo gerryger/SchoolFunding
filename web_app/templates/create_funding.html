@@ -1,4 +1,5 @@
 {% extends "bootstrap_5_layout.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
 {% set active_page = "create_funding" %}
 {% set bg_image_active = false %}
 
@@ -33,7 +34,8 @@
                 </div>
                 <div class="col-6 align-items-start">
                     <h1>Fundraiser Information</h1>
-                    <form>
+                    {{ render_form(form) }}
+                    <!-- <form>
                         <div class="mb-3">
                             <label for="fundraiserTitleTxt" class="form-label">Fundraiser title</label>
                             <input type="text" class="form-control" id="fundraiserTitleTxt" aria-describedby="emailHelp">
@@ -54,7 +56,7 @@
                             <select class="selectpicker countrypicker form-select" id="fundraiserLocationSelect"></select>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>
