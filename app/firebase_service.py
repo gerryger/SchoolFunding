@@ -39,23 +39,6 @@ class FirebaseService:
         products = [doc.to_dict() for doc in products_ref.stream()]
         return products
     
-    #
-    # FUNDINGS
-    #
-
-    def fetch_fundings(self):
-        fundings_ref = self.db.collection("fundings")
-        fundings = [doc.to_dict() for doc in fundings_ref.stream()]
-        return fundings
-
-    #
-    # FUND TYPE
-    #
-
-    def fetch_fund_types(self):
-        fund_types_ref = self.db.collection("fund_type")
-        fund_types = [type.to_dict() for type in fund_types_ref.stream()]
-        return fund_types
 
     #
     # ORDERS
@@ -108,8 +91,50 @@ class FirebaseService:
         orders = sorted(orders, key=itemgetter("order_at"), reverse=True)
         return orders
 
+    #
+    # USERS
+    #
+    @property
+    def users_ref(self):
+        return self.db.collection("users")
 
+    def create_or_update_user(self, user_info):
+        user_with_email_ref = self.users_ref.where("email", "==", user_info["email"]).limit(1)
+        user_with_email_doc = user_with_email_ref.get()
+        user_data = {
+            "email": user_info["email"],
+            "given_name": user_info["given_name"],
+            "family_name": user_info["family_name"],
+            "profile_picture_url": user_info["picture"]
+        }
+        if len(user_with_email_doc) == 0:
+            new_user_ref = self.users_ref.document()
+            results = new_user_ref.set(user_data)
+            print("New user has been created successfully")
+        else:
+            for doc in user_with_email_doc:
+                doc_ref = self.users_ref.document(doc.id)
+                results = doc_ref.update(user_data)
+            print("User updated successfully")
+        return user_data, results
+    
+    #
+    # FUNDINGS
+    #
+    def fetch_fundings(self):
+        fundings_ref = self.db.collection("fundings")
+        fundings = [doc.to_dict() for doc in fundings_ref.stream()]
+        return fundings
 
+    # def create_or_update_funding(self, funding):
+
+    #
+    # FUND TYPE
+    #
+    def fetch_fund_types(self):
+        fund_type_ref = self.db.collection("fund_type")
+        fund_types = [type.to_dict() for type in fund_type_ref.stream()]
+        return fund_types
 
 
 if __name__ == "__main__":
