@@ -11,6 +11,9 @@ Authlib==1.2.0
 # database (cloud firestore):
 firebase-admin==5.0.0
 
+# flask form
+WTForms==3.1.1
+
 # production web server (for heroku):
 gunicorn
 
