@@ -17,10 +17,12 @@ class CreateFundingForm(FlaskForm):
         description='Add the title of your page.'
     )
     fundTypeSelect = SelectField(
+        validate_choice=False,
         label='Fund Type',
         description='Select the funding type.'
     )
     currencySelect = SelectField(
+        validate_choice=False,
         label='Currency',
         description='Currency used for this fundraising.',
         choices=currencyChoices
