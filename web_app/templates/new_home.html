@@ -1,0 +1,55 @@
+{% extends "layout_new.html" %}
+{% block content %}
+    <div class="container py-6">
+        <div class="row flex-lg-row-reverse align-items-center g-5">
+            <div class="col-10 mx-auto col-sm-8 col-lg-6">
+                <!-- <img src="https://images.unsplash.com/photo-1530435460869-d13625c69bbf?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8MTB8fHdlYnNpdGV8ZW58MHwwfHx8MTYyMTQ0NjkyNg&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080&amp;h=768" class="d-block mx-lg-auto img-fluid" alt="" loading="lazy"> -->
+                <img src="{{ url_for('static', filename='images/landing/donation-home.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+                <div class="mb-3">
+                    <div editable="rich">
+                        <h2 class="fw-bold display-5">Fundraising for the people and causes you care.</h2>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div editable="rich">
+                        <p class="lead">
+                            We provide a trusted donation for people from worldwide to support people and organizations.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start"><a class="btn btn-primary px-4 me-md-2" href="#" role="button">Donate now</a>
+                    <a class="btn btn-outline-secondary px-4" href="#" role="button">How it works</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 bg-light">
+        <div class="row ml-3">
+            <div class="col-lg-3 col-xl-3">
+                <i class="bi bi-archive-fill"></i><span style="font-family: 'Rubik Doodle Shadow', sans-serif;"> ZenCargo</span>
+            </div>
+            <div class="col-lg-3 col-xl-3">
+                <i class="bi bi-archive-fill"></i><span style="font-family: 'Inter', sans-serif;"> FlatFair</span>
+            </div>
+            <div class="col-lg-3 col-xl-3">
+                <i class="bi bi-archive-fill"></i><span style="font-family: 'Inter', sans-serif;"> globalpayments</span>
+            </div>
+            <div class="col-lg-3 col-xl-3">
+                <i class="bi bi-archive-fill"></i><span style="font-family: 'Inter', sans-serif;"> donateworld</span>
+            </div>
+        </div>
+        <div class="row">
+            
+        </div>
+        <div class="row">
+            
+        </div>
+        <div class="row">
+            
+        </div>
+    </div>
+{% endblock %}

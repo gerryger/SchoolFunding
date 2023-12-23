@@ -4,6 +4,10 @@ from web_app.routes.wrappers import authenticated_route
 
 home_routes = Blueprint("home_routes", __name__)
 
+@home_routes.route("/new-home")
+def new_home():
+    return render_template("new_home.html")
+
 @home_routes.route("/")
 @home_routes.route("/home")
 def index():

@@ -22,14 +22,14 @@ load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY", default="super secret") # IMPORTANT: override in production
 
-APP_TITLE = "My App"
+APP_TITLE = "StartFund"
 
 # https://icons.getbootstrap.com/
 NAV_ICON_CLASS = "bi-globe"
 
 # https://getbootstrap.com/docs/5.1/components/navbar/#color-schemes
 # https://getbootstrap.com/docs/5.1/customize/color/#theme-colors
-NAV_COLOR_CLASS = "navbar-dark bg-dark"
+NAV_COLOR_CLASS = "navbar-light bg-light"
 
 # for google oauth login:
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
