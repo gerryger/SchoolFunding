@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from operator import itemgetter
 from dotenv import load_dotenv
 
-from firebase_admin import credentials, initialize_app, firestore
+from firebase_admin import credentials, initialize_app, firestore, storage
 
 
 load_dotenv()

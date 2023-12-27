@@ -181,7 +181,7 @@
 .page-header {
     padding-top: 12rem;
     padding-bottom: 6rem;
-    background: linear-gradient(rgba(0, 29, 35, .8), rgba(0, 29, 35, .8)), url(../img/carousel-1.jpg) center center no-repeat;
+    background: linear-gradient(rgba(0, 29, 35, .8), rgba(0, 29, 35, .8)), url(../../images/fundhub/carousel-1.jpg) center center no-repeat;
     background-size: cover;
 }
 
@@ -445,4 +445,12 @@
 
 .footer .copyright a:hover {
     color: var(--primary);
+}
+
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
 }

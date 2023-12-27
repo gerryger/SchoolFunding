@@ -36,7 +36,6 @@ class CreateFundingForm(FlaskForm):
         label='End date',
         description='Date where the fundraising finishes.',
         format='%Y-%m-%d %H:%M:%S',
-        validators=[DataRequired()],
         widget=DateTimeInput(),
         id='finishedDateTxt'
     )

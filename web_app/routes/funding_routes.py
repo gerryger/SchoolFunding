@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, current_app , session
+from flask import Blueprint, render_template, current_app , session, redirect
 
 from web_app.routes.wrappers import authenticated_route
 from web_app.routes.forms.create_funding_form import CreateFundingForm
@@ -12,15 +12,17 @@ def create_funding():
     fund_types = service.fetch_fund_types()
     form = CreateFundingForm()
     form.fundTypeSelect.choices = [(ft['type'], ft['type'].lower().replace("_"," ")) for ft in fund_types]
-    return render_template("create_funding.html", form=form, fund_types=fund_types)
+    return render_template("new_create_funding.html", form=form, fund_types=fund_types)
 
 @funding_routes.route("/create-funding", methods=["POST"])
 def handle_create_funding():
     form = CreateFundingForm()
-    print("FORM: ", form)
     if form.validate_on_submit():
         title = form.fundraiserTitle.data
         print("TITLE: ", title)
+    else:
+        print(form.errors)
+        return redirect("/create-funding")
 
 @funding_routes.route("/donation", methods=['GET'])
 def donate_now():

@@ -44,21 +44,19 @@
         <!-- rubik doodle shadow font -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:ital,wght@1,700&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
 
-        <!-- bootstrap datepicker CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
         <!-- Libraries Stylesheet -->
         <link href="{{ url_for('static', filename='css/animate/animate.min.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='fundhub-lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
         <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
 
         <!-- Bootstrap JS Bundle -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <!-- bootstrap datepicker -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -70,12 +68,12 @@
         <script src="//unpkg.com/bootstrap-select@1.12.4/dist/js/bootstrap-select.min.js"></script>
         <script src="//unpkg.com/bootstrap-select-country@4.0.0/dist/js/bootstrap-select-country.min.js"></script>
 
-        <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}lib/easing/easing.min.js"></script>
-        <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}lib/waypoints/waypoints.min.js"></script>
-        <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}lib/parallax/parallax.min.js"></script>
-        
+        <!-- chariteam js -->
+        <script src="{{ url_for('static', filename='fundhub-lib/wow/wow.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='fundhub-lib/easing/easing.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='fundhub-lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='fundhub-lib/owlcarousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='fundhub-lib/parallax/parallax.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
         <script>
@@ -92,77 +90,140 @@
             //})
 
             $(document).ready(function(){
-                $('#finishedDateTxt').datepicker({
-                    format: 'yyyy-mm-dd',
-                    autoclose: true,
-                    todayHighlight: true,
-                    todayBtn: true,
-                    clearBtn: true
+                $('#finishedDateTxt').datetimepicker({
+                    dateFormat: 'yyyy-mm-dd',
+                    timeFormat: 'HH:mm',
                 });
             });
         </script>
-
-        <style>
-
-            .footer-float-right {
-                text-align: right;
-            }
-
-            @media only screen and (max-width: 600px) {
-                .footer-float-right {
-                    text-align: left;
-                }
-            }
-
-        </style>
 
         {% block head %}
         {% endblock %}
     </head>
     <body>
-        <!-- Start header/navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient" aria-label="FundHub navigation bar">
-            <div class="container">
-                <a class="navbar-brand" href="/">
-                    <span style="font-family: 'Inter', sans-serif; ">FundHub.</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFundhub" aria-controls="navbarsFundhub" 
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarsFundhub">
-                    <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">About us</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Donate now</a>
-                        </li>
-                    </ul>
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
 
-                    <ul class="navbar-nav mb-2 mb-md-0 ms-5">
-                        <li>
-                            <a class="nav-link" href="/user/profile">
-                                {% if session["current_user"] %}
-                                    <img class="rounded-circle" src="{{ session['current_user']['picture'] }}" alt="profile photo" height="32px" width="32px">
-                                {% else %}
-                                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="profile photo" height="32px" width="32px">
-                                {% endif %}
-                            </a>
-                        </li>
-                    </ul>
+        <!-- Navbar Start -->
+        <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+            <div class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
+                <div class="col-lg-6 px-5 text-start">
+                    <small><i class="fa fa-map-marker-alt me-2"></i>123 Street, New York, USA</small>
+                    <small class="ms-4"><i class="fa fa-envelope me-2"></i>info@example.com</small>
+                </div>
+                <div class="col-lg-6 px-5 text-end">
+                    <small>Follow us:</small>
+                    <a class="text-white-50 ms-3" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a class="text-white-50 ms-3" href=""><i class="fab fa-twitter"></i></a>
+                    <a class="text-white-50 ms-3" href=""><i class="fab fa-linkedin-in"></i></a>
+                    <a class="text-white-50 ms-3" href=""><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-        </nav>
-        <div class="container-fluid" style="margin-top:2em;">
-            <div id="content">
-                {% block content %}
-                {% endblock %}
+
+            <nav class="navbar navbar-expand-lg navbar-dark py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+                <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                    <h1 class="fw-bold text-primary m-0">Fund<span class="text-white">Hub</span></h1>
+                </a>
+                <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto p-4 p-lg-0">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="causes.html" class="nav-item nav-link">Causes</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu m-0">
+                                <a href="service.html" class="dropdown-item">Service</a>
+                                <a href="donate.html" class="dropdown-item">Donate</a>
+                                <a href="team.html" class="dropdown-item">Our Team</a>
+                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                <!-- <a href="404.html" class="dropdown-item">404 Page</a> -->
+                            </div>
+                        </div>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    </div>
+                    <div class="d-none d-lg-flex ms-2">
+                        {% if session["current_user"] %}
+                            <a class="btn btn-outline-primary py-2 px-3" href="#">
+                                <img class="rounded-circle" src="{{ session['current_user']['picture'] }}" alt="profile photo" height="32px" width="32px">
+                                {{ session['current_user']['name'] }}
+                            </a>
+                        {% else %}
+                            <a class="btn btn-outline-primary py-2 px-3" href="/login">
+                                Login
+                                <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                                    <i class="fa fa-arrow-right"></i>
+                                </div>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar End -->
+
+        <!-- Content start -->
+        {% block content %}
+        {% endblock %}
+        <!-- Content end -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-white-50 footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h1 class="fw-bold text-primary mb-4">Fund<span class="text-white">Hub</span></h1>
+                        <p>Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-square me-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square me-1" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-square me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-light mb-4">Address</h5>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-light mb-4">Quick Links</h5>
+                        <a class="btn btn-link" href="">About Us</a>
+                        <a class="btn btn-link" href="">Contact Us</a>
+                        <a class="btn btn-link" href="">Our Services</a>
+                        <a class="btn btn-link" href="">Terms & Condition</a>
+                        <a class="btn btn-link" href="">Support</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-light mb-4">Newsletter</h5>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a href="#">FundHub</a>, All Right Reserved.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </body>
 </html>
