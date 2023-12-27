@@ -1,8 +1,9 @@
 from flask import current_app
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField, SelectField, DateTimeField, TextAreaField, FileField, DecimalField
-from wtforms.validators import DataRequired, Length, InputRequired
+from wtforms.validators import DataRequired, Length, InputRequired, ValidationError
 from wtforms.widgets import DateTimeInput
+from datetime import datetime, timedelta
 
 class CreateFundingForm(FlaskForm):
     currencyChoices=[
@@ -35,7 +36,7 @@ class CreateFundingForm(FlaskForm):
     finishedDate = DateTimeField(
         label='End date',
         description='Date where the fundraising finishes.',
-        format='%Y-%m-%d %H:%M:%S',
+        format='%Y-%m-%d %H:%M',
         widget=DateTimeInput(),
         id='finishedDateTxt'
     )
