@@ -5,6 +5,7 @@ from pprint import pprint
 from datetime import datetime, timezone
 from operator import itemgetter
 from dotenv import load_dotenv
+from flask import current_app
 
 from firebase_admin import credentials, initialize_app, firestore, storage
 
@@ -29,6 +30,8 @@ class FirebaseService:
         self.creds = credentials.Certificate(CREDENTIALS_FILEPATH)
         self.app = initialize_app(self.creds) # or set FIREBASE_CONFIG variable and initialize without creds
         self.db = firestore.client()
+        self.bucket = storage.bucket('school-funding.appspot.com')
+
 
     #
     # PRODUCTS
@@ -135,7 +138,15 @@ class FirebaseService:
         fund_type_ref = self.db.collection("fund_type")
         fund_types = [type.to_dict() for type in fund_type_ref.stream()]
         return fund_types
-
+    
+    def upload_to_bucket(self, fileName):
+        destinationPath = f'fundings/{fileName}'
+        sourceFilePath = os.path.join(
+                current_app.root_path, 'static', 'images', 'fundhub', 'upload-temp', fileName
+            )
+        blob = self.bucket.blob(destinationPath)
+        blob.upload_from_filename(sourceFilePath)
+        return blob.public_url
 
 if __name__ == "__main__":
 

@@ -91,17 +91,6 @@
             //    cookie_domain: '{{ config.GA_DOMAIN }}',
             //    cookie_flags: 'SameSite=None;Secure',
             //})
-
-            $(document).ready(function(){
-                const td = new tempusDominus.TempusDominus(document.getElementById('finishedDateTxt'), {
-                    display: {
-                        components: {
-                            useTwentyfourHour: true
-                        }
-                    }
-                });
-                td.dates.formatInput = function(date) { {return moment(date).format('YYYY-MM-DD HH:mm') } }
-            });
         </script>
 
         {% block head %}

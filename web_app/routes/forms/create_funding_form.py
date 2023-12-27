@@ -1,7 +1,7 @@
 from flask import current_app
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField, SelectField, DateTimeField, TextAreaField, FileField, DecimalField
-from wtforms.validators import DataRequired, Length, InputRequired, ValidationError
+from wtforms.validators import DataRequired, Length, InputRequired
 from wtforms.widgets import DateTimeInput
 from datetime import datetime, timedelta
 
