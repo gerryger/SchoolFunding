@@ -1,0 +1,58 @@
+{% extends "layout_new.html" %}
+{% block content %}
+    <div class="container-fluid py-6">
+        <div class="row flex-lg-row-reverse align-items-center g-5">
+            <div class="col-10 mx-auto col-sm-8 col-lg-6">
+                <!-- <img src="https://images.unsplash.com/photo-1530435460869-d13625c69bbf?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8MTB8fHdlYnNpdGV8ZW58MHwwfHx8MTYyMTQ0NjkyNg&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080&amp;h=768" class="d-block mx-lg-auto img-fluid" alt="" loading="lazy"> -->
+                <img src="{{ url_for('static', filename='images/landing/donation-home.jpg') }}" class="d-block mx-lg-auto img-fluid" style="width: 100%;" alt="" loading="lazy">
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea class="form-control" disabled rows="3">asdasdasdasdasdasdasdasdasd</textarea>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Donation:</label>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="card text-center border-dark mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">$20</h5>
+                                        <a href="#" class="btn btn-primary">Donate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card text-center border-dark mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">$20</h5>
+                                        <a href="#" class="btn btn-primary">Donate</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card text-center border-dark mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">$20</h5>
+                                        <a href="#" class="btn btn-primary">Donate</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="otherAmountTxt" class="form-label">Other amount:</label>
+                        <input type="number" class="form-control" id="otherAmountTxt" aria-describedby="otherAmountHelp">
+                        <div id="otherAmountHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

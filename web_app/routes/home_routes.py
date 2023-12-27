@@ -6,7 +6,9 @@ home_routes = Blueprint("home_routes", __name__)
 
 @home_routes.route("/new-home")
 def new_home():
-    return render_template("new_home.html")
+    service = current_app.config["FIREBASE_SERVICE"]
+    fundings = service.fetch_fundings()
+    return render_template("new_home.html", fundings=fundings)
 
 @home_routes.route("/")
 @home_routes.route("/home")

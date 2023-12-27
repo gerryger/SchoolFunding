@@ -21,3 +21,7 @@ def handle_create_funding():
     if form.validate_on_submit():
         title = form.fundraiserTitle.data
         print("TITLE: ", title)
+
+@funding_routes.route("/donation", methods=['GET'])
+def donate_now():
+    return render_template("donation.html")
