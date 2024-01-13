@@ -124,12 +124,39 @@ class FirebaseService:
     #
     # FUNDINGS
     #
+    @property
+    def fundings_ref(self):
+        return self.db.collection("fundings")
+    
     def fetch_fundings(self):
         fundings_ref = self.db.collection("fundings")
-        fundings = [doc.to_dict() for doc in fundings_ref.stream()]
-        return fundings
+        documents = fundings_ref.stream()
+        fields_to_lower = ['type']
+        data_with_ids = []
 
-    # def create_or_update_funding(self, funding):
+        for document in documents:
+            document_id = document.id
+            document_data = {
+                field: value.lower().replace("_", " ") if field in fields_to_lower and isinstance(value, str) else value
+                for field, value in document.to_dict().items()
+            }
+            data_with_id = {'id': document_id, 'data': document_data}
+            data_with_ids.append(data_with_id)
+
+        return data_with_ids
+    
+    def fetch_funding_by_id(self, funding_id):
+        funding_ref = self.fundings_ref.document(funding_id)
+        funding_snapshot = funding_ref.get()
+        funding_data = funding_snapshot.to_dict()
+        data_with_id = {'id': funding_id, 'data': funding_data}
+        return data_with_id
+
+    def create_funding(self, funding):
+        new_fundings_ref = self.fundings_ref.document()
+        results = new_fundings_ref.set(funding)
+        #print(results) #> {update_time: {seconds: 1648419942, nanos: 106452000}}
+        return funding
 
     #
     # FUND TYPE
@@ -146,6 +173,7 @@ class FirebaseService:
             )
         blob = self.bucket.blob(destinationPath)
         blob.upload_from_filename(sourceFilePath)
+        blob.make_public()
         return blob.public_url
 
 if __name__ == "__main__":
