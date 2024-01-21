@@ -1,48 +1,7 @@
 {% extends "layout_new.html" %}
 {% block head %}
     <script src="https://www.paypal.com/sdk/js?components=buttons,card-fields&client-id={{ paypal_client_id }}"></script>
-    <script type="text/javascript">
-        paypal
-            .Buttons({
-                // Sets up the transaction when a payment button is clicked
-                createOrder: function (data) {
-                    return fetch("myserver.com/api/orders", {
-                        method: "POST",
-                        // Use the "body" parameter to optionally pass additional order information
-                        // such as product ID or amount
-                        body: {
-                        paymentSource: data.paymentSource,
-                        },
-                    })
-                        .then((response) => response.json())
-                        .then((order) => order.id);
-                },
-                // Finalize the transaction after payer approval
-                onApprove: function (data) {
-                    return fetch(`myserver.com/api/orders/${data.orderID}/capture`, {
-                        method: "POST",
-                    })
-                        .then((response) => response.json())
-                        .then((orderData) => {
-                        // Successful capture! For dev/demo purposes:
-                        console.log(
-                            "Capture result",
-                            orderData,
-                            JSON.stringify(orderData, null, 2),
-                        );
-                        var transaction = orderData.purchase_units[0].payments.captures[0];
-                        // Show a success message within this page. For example:
-                        // var element = document.getElementById('paypal-button-container');
-                        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                        // Or go to another URL: actions.redirect('thank_you.html');
-                        });
-                },
-                onError: function (error) {
-                    // Do something with the error from the SDK
-                },
-        })
-        .render("#paypal-button-container");
-    </script>
+    <script src="{{ url_for('static', filename='js/paypal-integration.js') }}"></script>    
 {% endblock %}
 {% block content %}
     <!-- Page Header Start -->
@@ -89,15 +48,6 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div id="paypal-button-container" class="form-floating"></div>
-                                </div>
-                                <div class="col-12">
-                                    <div id="card-name-field-container" class="form-floating"></div>
-                                </div>
-                                <div class="col-12">
-                                    <div id="card-number-field-container" class="form-floating"></div>
-                                </div>
-                                <div class="col-12">
                                     <div class="btn-group d-flex justify-content-around">
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
                                         <label class="btn btn-light py-3" for="btnradio1">$10</label>
@@ -110,13 +60,29 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
+                                    <div id="paypal-button-container" class="form-floating"></div>
+                                </div>
+                                {#<!-- <div class="col-12">
+                                    <div id="card-name-field-container" class="form-floating"></div>
+                                </div>
+                                <div class="col-12">
+                                    <div id="card-number-field-container" class="form-floating"></div>
+                                </div>
+                                <div class="col-12">
+                                    <div id="card-cvv-field-container" class="form-floating"></div>
+                                </div>
+                                <div class="col-12">
+                                    <div id="card-expiry-field-container" class="form-floating"></div>
+                                </div>                                 -->
+                                #}
+                                {#<!-- <div class="col-12">
                                     <button id="card-field-submit-button" class="btn btn-primary px-5" style="height: 60px;">
                                         Donate Now
                                         <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
                                             <i class="fa fa-arrow-right"></i>
                                         </div>
                                     </button>
-                                </div>
+                                </div> -->#}
                             </div>
                         </form>
                     </div>
