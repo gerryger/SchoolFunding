@@ -1,7 +1,8 @@
 {% extends "layout_new.html" %}
 {% block head %}
     <script src="https://www.paypal.com/sdk/js?components=buttons,card-fields&client-id={{ paypal_client_id }}"></script>
-    <script src="{{ url_for('static', filename='js/paypal-integration.js') }}"></script>    
+    <script src="{{ url_for('static', filename='js/paypal-integration.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/donation-page.js') }}"></script>    
 {% endblock %}
 {% block content %}
     <!-- Page Header Start -->
@@ -35,7 +36,7 @@
                     <div class="h-100 bg-secondary p-5">
                         <form>
                             <div class="row g-3">
-                                <div class="col-12">
+                                {#<!-- <div class="col-12">
                                     <div class="form-floating">
                                         <input type="text" class="form-control bg-light border-0" id="name" placeholder="Your Name">
                                         <label for="name">Your Name</label>
@@ -46,10 +47,10 @@
                                         <input type="email" class="form-control bg-light border-0" id="email" placeholder="Your Email">
                                         <label for="email">Your Email</label>
                                     </div>
-                                </div>
+                                </div> -->#}
                                 <div class="col-12">
                                     <div class="btn-group d-flex justify-content-around">
-                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
+                                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1">
                                         <label class="btn btn-light py-3" for="btnradio1">$10</label>
 
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2">
@@ -58,6 +59,14 @@
                                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3">
                                         <label class="btn btn-light py-3" for="btnradio3">$30</label>
                                     </div>
+                                </div>
+                                <div class="col-12" id="serviceChargeDiv">
+                                    <label class="py-3" data-service-charge-rate="{{ service_charge_rate }}">Service charge:</label>
+                                    <label class="py-3 float-end">$1.50</label>
+                                </div>
+                                <div class="col-12" id="totalDiv">
+                                    <label class="py-3">Total:</label>
+                                    <label class="py-3 float-end">$1.50</label>
                                 </div>
                                 <div class="col-12">
                                     <div id="paypal-button-container" class="form-floating"></div>

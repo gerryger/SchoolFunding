@@ -175,6 +175,24 @@ class FirebaseService:
         blob.upload_from_filename(sourceFilePath)
         blob.make_public()
         return blob.public_url
+    
+    #
+    # SYSTEM PROPERTIES
+    #
+    @property
+    def system_properties_ref(self):
+        return self.db.collection("system_properties")
+    
+    def get_system_properties_by_name(self, property_name):
+        query = self.system_properties_ref.where('name', '==', property_name).get()
+
+        # Process the query results
+        results = []
+        for doc in query:
+            results.append(doc.to_dict())
+
+        final_result = {'data': results}
+        return final_result
 
 if __name__ == "__main__":
 

@@ -71,9 +71,15 @@ def handle_create_funding():
 @funding_routes.route("/donation/<string:funding_id>", methods=['GET'])
 def donate_now(funding_id):
     service = current_app.config["FIREBASE_SERVICE"]
+    
     funding = service.fetch_funding_by_id(funding_id)
+    
     paypal_client_id = os.getenv("PAYPAL_CLIENT_ID")
-    return render_template("donation.html", funding=funding, paypal_client_id=paypal_client_id)
+
+    # get service charge
+    service_charge_rate = service.get_system_properties_by_name('service_charge_rate')
+
+    return render_template("donation.html", funding=funding, paypal_client_id=paypal_client_id, service_charge_rate=service_charge_rate['data'][0]['value'])
 
 @funding_routes.route("/causes", methods=['GET'])
 def causes():
