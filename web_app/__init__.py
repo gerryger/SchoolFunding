@@ -12,6 +12,7 @@ from web_app.routes.home_routes import home_routes
 from web_app.routes.auth_routes import auth_routes
 from web_app.routes.user_routes import user_routes
 from web_app.routes.funding_routes import funding_routes
+from web_app.routes.paypal_routes import paypal_routes
 
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm, CSRFProtect
@@ -106,6 +107,7 @@ def create_app(firebase_service=None):
     app.register_blueprint(auth_routes)
     app.register_blueprint(user_routes)
     app.register_blueprint(funding_routes)
+    app.register_blueprint(paypal_routes)
 
     return app
 

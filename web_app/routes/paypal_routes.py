@@ -1,5 +1,6 @@
 import os, requests, aiohttp
 from flask import Blueprint, jsonify, request, render_template, current_app , session
+from flask_wtf import CSRFProtect
 from base64 import b64encode
 
 from web_app.routes.wrappers import authenticated_route
@@ -9,6 +10,9 @@ paypal_routes = Blueprint("paypal_routes", __name__)
 PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID");
 PAYPAL_CLIENT_SECRET = os.getenv("PAYPAL_CLIENT_SECRET");
 BASE_URL = os.getenv("PAYPAL_URL")
+
+# Configure CSRF protection
+csrf = CSRFProtect(current_app)
 
 # Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
 # @see https://developer.paypal.com/api/rest/authentication/
@@ -82,7 +86,7 @@ def handle_create_order():
     except Exception as error:
         return jsonify({'error': str(error)}), 500
     
-@paypal_routes('/paypal/orders', methods=['POST'])
+@paypal_routes.route('/paypal/orders', methods=['POST'])
 def create_order():
     try:
         cart = request.json.get('cart', {})

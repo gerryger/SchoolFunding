@@ -2,12 +2,16 @@ paypal
     .Buttons({
         // Sets up the transaction when a payment button is clicked
         createOrder: function (data) {
-            return fetch("/paypal/orders", {
+            return fetch("http://localhost:5000/paypal/orders", {
                 method: "POST",
                 // Use the "body" parameter to optionally pass additional order information
                 // such as product ID or amount
                 body: {
                     paymentSource: data.paymentSource,
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': data.csrfToken
                 },
             })
                 .then((response) => response.json())
@@ -15,7 +19,7 @@ paypal
         },
         // Finalize the transaction after payer approval
         onApprove: function (data) {
-            return fetch(`myserver.com/api/orders/${data.orderID}/capture`, {
+            return fetch(`http://localhost:5000/paypal/orders/${data.orderID}/capture`, {
                 method: "POST",
             })
                 .then((response) => response.json())
