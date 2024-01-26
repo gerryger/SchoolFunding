@@ -100,6 +100,12 @@ class FirebaseService:
     @property
     def users_ref(self):
         return self.db.collection("users")
+    
+    def find_user_by_email(self, email):
+        user_with_email_ref = self.users_ref.where("email", "==", email).limit(1)
+        user_with_email_doc = user_with_email_ref.get()
+        return user_with_email_doc
+            
 
     def create_or_update_user(self, user_info):
         user_with_email_ref = self.users_ref.where("email", "==", user_info["email"]).limit(1)
