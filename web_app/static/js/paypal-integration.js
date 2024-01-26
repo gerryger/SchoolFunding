@@ -2,16 +2,21 @@ paypal
     .Buttons({
         // Sets up the transaction when a payment button is clicked
         createOrder: function (data) {
+            var csrfToken = $('input[name="csrfToken"]').val();
+            var fundingId = $('input[name="fundingId"]').val();
             return fetch("http://localhost:5000/paypal/orders", {
                 method: "POST",
                 // Use the "body" parameter to optionally pass additional order information
                 // such as product ID or amount
-                body: {
-                    paymentSource: data.paymentSource,
-                },
+                body: JSON.stringify({
+                    cart: {
+                        funding_id: fundingId,
+                         
+                    },
+                }),
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': data.csrfToken
+                    'X-CSRFToken': csrfToken
                 },
             })
                 .then((response) => response.json())
