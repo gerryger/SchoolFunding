@@ -72,6 +72,7 @@
                                     <div id="paypal-button-container" class="form-floating"></div>
                                 </div>
                                 <input type="hidden" name="csrfToken" value="{{ csrf_token() }}" />
+                                <input type="hidden" name="fundingId" value="{{ funding.id }}" />
                                 {#<!-- <div class="col-12">
                                     <div id="card-name-field-container" class="form-floating"></div>
                                 </div>
