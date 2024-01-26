@@ -21,6 +21,7 @@ def create_funding():
     return render_template("new_create_funding.html", form=form, fund_types=fund_types)
 
 @funding_routes.route("/create-funding", methods=["POST"])
+@authenticated_route
 def handle_create_funding():
     form = CreateFundingForm()
     if form.validate_on_submit():
@@ -69,6 +70,7 @@ def handle_create_funding():
         return redirect("/create-funding")
 
 @funding_routes.route("/donation/<string:funding_id>", methods=['GET'])
+@authenticated_route
 def donate_now(funding_id):
     service = current_app.config["FIREBASE_SERVICE"]
     
@@ -82,6 +84,7 @@ def donate_now(funding_id):
     return render_template("donation.html", funding=funding, paypal_client_id=paypal_client_id, service_charge_rate=service_charge_rate['data'][0]['value'])
 
 @funding_routes.route("/causes", methods=['GET'])
+@authenticated_route
 def causes():
     service = current_app.config["FIREBASE_SERVICE"]
     fundings = service.fetch_fundings()
