@@ -86,12 +86,21 @@ def handle_create_order():
     except Exception as error:
         return jsonify({'error': str(error)}), 500
     
+def create_cart(cart):
+    service = current_app.config["FIREBASE_SERVICE"]
+    user = service.find_user_by_email(cart["user_email"])
+    
 @paypal_routes.route('/paypal/orders', methods=['POST'])
 def create_order():
     try:
         request_data = request.get_json()
         cart = request_data.get('cart', {})
         print("Shopping cart information passed from the frontend create_order() callback:", cart)
+
+        create_cart({
+            "user_email": session["current_user"]["email"],
+            
+        })
 
         # Assuming createOrder is a function similar to the one you provided earlier
         result = handle_create_order(cart)

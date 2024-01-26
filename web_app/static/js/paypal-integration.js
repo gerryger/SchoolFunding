@@ -11,7 +11,7 @@ paypal
                 body: JSON.stringify({
                     cart: {
                         funding_id: fundingId,
-                         
+
                     },
                 }),
                 headers: {
