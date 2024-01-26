@@ -89,7 +89,8 @@ def handle_create_order():
 @paypal_routes.route('/paypal/orders', methods=['POST'])
 def create_order():
     try:
-        cart = request.json.get('cart', {})
+        request_data = request.get_json()
+        cart = request_data.get('cart', {})
         print("Shopping cart information passed from the frontend create_order() callback:", cart)
 
         # Assuming createOrder is a function similar to the one you provided earlier
